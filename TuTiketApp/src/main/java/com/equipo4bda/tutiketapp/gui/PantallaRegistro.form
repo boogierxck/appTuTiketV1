@@ -36,7 +36,7 @@
                       <Component id="cmbTipoUsuario" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="txtApellidoPaterno" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtApellidoMaterno" alignment="0" pref="373" max="32767" attributes="0"/>
+                  <Component id="txtApellidoMaterno" alignment="0" pref="425" max="32767" attributes="0"/>
                   <Component id="txtFechaNacimiento" alignment="0" max="32767" attributes="0"/>
                   <Component id="txtEmail" alignment="0" max="32767" attributes="0"/>
                   <Component id="txtContrasena" alignment="0" max="32767" attributes="0"/>

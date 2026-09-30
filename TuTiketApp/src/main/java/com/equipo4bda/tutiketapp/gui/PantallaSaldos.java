@@ -33,6 +33,21 @@ public class PantallaSaldos extends javax.swing.JFrame {
         jPSaldoDisponible = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lblSaldoDisponible = new javax.swing.JLabel();
+        pnlCuentasVinculadas = new javax.swing.JPanel();
+        lblCuentasVinculadas = new javax.swing.JLabel();
+        lblNCuentas = new javax.swing.JLabel();
+        pnlMisCuentas = new javax.swing.JPanel();
+        lblMisCuentas = new javax.swing.JLabel();
+        btnVincularCuenta = new javax.swing.JButton();
+        lblCuenta = new javax.swing.JLabel();
+        lblSaldo = new javax.swing.JLabel();
+        lblBanco = new javax.swing.JLabel();
+        lblCuenta1 = new javax.swing.JLabel();
+        lblSaldo1 = new javax.swing.JLabel();
+        lblBanco1 = new javax.swing.JLabel();
+        lblCuenta2 = new javax.swing.JLabel();
+        lblSaldo2 = new javax.swing.JLabel();
+        lblBanco2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,6 +82,122 @@ public class PantallaSaldos extends javax.swing.JFrame {
         lblSaldoDisponible.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblSaldoDisponible.setText("Saldo disponible:");
 
+        pnlCuentasVinculadas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        lblCuentasVinculadas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblCuentasVinculadas.setText("Cuentas vinculadas:");
+
+        lblNCuentas.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblNCuentas.setText("0");
+
+        javax.swing.GroupLayout pnlCuentasVinculadasLayout = new javax.swing.GroupLayout(pnlCuentasVinculadas);
+        pnlCuentasVinculadas.setLayout(pnlCuentasVinculadasLayout);
+        pnlCuentasVinculadasLayout.setHorizontalGroup(
+            pnlCuentasVinculadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCuentasVinculadasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlCuentasVinculadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCuentasVinculadas)
+                    .addComponent(lblNCuentas))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnlCuentasVinculadasLayout.setVerticalGroup(
+            pnlCuentasVinculadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCuentasVinculadasLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblNCuentas)
+                .addGap(18, 18, 18)
+                .addComponent(lblCuentasVinculadas)
+                .addContainerGap())
+        );
+
+        pnlMisCuentas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        lblMisCuentas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblMisCuentas.setText("Mis Cuentas Vinculadas");
+
+        btnVincularCuenta.setText("Vincular cuenta");
+
+        lblCuenta.setText("Cuenta: ");
+
+        lblSaldo.setText("0000");
+
+        lblBanco.setText("Banco");
+
+        lblCuenta1.setText("Cuenta: ");
+
+        lblSaldo1.setText("0000");
+
+        lblBanco1.setText("Banco");
+
+        lblCuenta2.setText("Cuenta: ");
+
+        lblSaldo2.setText("0000");
+
+        lblBanco2.setText("Banco");
+
+        javax.swing.GroupLayout pnlMisCuentasLayout = new javax.swing.GroupLayout(pnlMisCuentas);
+        pnlMisCuentas.setLayout(pnlMisCuentasLayout);
+        pnlMisCuentasLayout.setHorizontalGroup(
+            pnlMisCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMisCuentasLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(pnlMisCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlMisCuentasLayout.createSequentialGroup()
+                        .addComponent(lblSaldo)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnlMisCuentasLayout.createSequentialGroup()
+                        .addGroup(pnlMisCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblMisCuentas)
+                            .addGroup(pnlMisCuentasLayout.createSequentialGroup()
+                                .addComponent(lblCuenta)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblBanco)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 475, Short.MAX_VALUE)
+                        .addComponent(btnVincularCuenta)
+                        .addGap(15, 15, 15))
+                    .addGroup(pnlMisCuentasLayout.createSequentialGroup()
+                        .addGroup(pnlMisCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblSaldo2)
+                            .addGroup(pnlMisCuentasLayout.createSequentialGroup()
+                                .addComponent(lblCuenta2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblBanco2))
+                            .addComponent(lblSaldo1)
+                            .addGroup(pnlMisCuentasLayout.createSequentialGroup()
+                                .addComponent(lblCuenta1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblBanco1)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+        );
+        pnlMisCuentasLayout.setVerticalGroup(
+            pnlMisCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMisCuentasLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(pnlMisCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblMisCuentas)
+                    .addComponent(btnVincularCuenta))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlMisCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCuenta)
+                    .addComponent(lblBanco))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblSaldo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlMisCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCuenta1)
+                    .addComponent(lblBanco1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblSaldo1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlMisCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCuenta2)
+                    .addComponent(lblBanco2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblSaldo2)
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -75,10 +206,13 @@ public class PantallaSaldos extends javax.swing.JFrame {
                 .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblSaldoDisponible)
-                    .addComponent(jPSaldoDisponible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblDescripcion)
-                    .addComponent(lblTítuloSaldoCuentas))
-                .addContainerGap(302, Short.MAX_VALUE))
+                    .addComponent(lblTítuloSaldoCuentas)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(pnlCuentasVinculadas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPSaldoDisponible, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnlMisCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,7 +225,11 @@ public class PantallaSaldos extends javax.swing.JFrame {
                 .addComponent(lblSaldoDisponible)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPSaldoDisponible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(395, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(pnlCuentasVinculadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(pnlMisCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         pack();
@@ -123,10 +261,25 @@ public class PantallaSaldos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnVincularCuenta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPSaldoDisponible;
+    private javax.swing.JLabel lblBanco;
+    private javax.swing.JLabel lblBanco1;
+    private javax.swing.JLabel lblBanco2;
+    private javax.swing.JLabel lblCuenta;
+    private javax.swing.JLabel lblCuenta1;
+    private javax.swing.JLabel lblCuenta2;
+    private javax.swing.JLabel lblCuentasVinculadas;
     private javax.swing.JLabel lblDescripcion;
+    private javax.swing.JLabel lblMisCuentas;
+    private javax.swing.JLabel lblNCuentas;
+    private javax.swing.JLabel lblSaldo;
+    private javax.swing.JLabel lblSaldo1;
+    private javax.swing.JLabel lblSaldo2;
     private javax.swing.JLabel lblSaldoDisponible;
     private javax.swing.JLabel lblTítuloSaldoCuentas;
+    private javax.swing.JPanel pnlCuentasVinculadas;
+    private javax.swing.JPanel pnlMisCuentas;
     // End of variables declaration//GEN-END:variables
 }
