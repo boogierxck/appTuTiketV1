@@ -34,7 +34,6 @@ public class PantallaInicioSesion extends javax.swing.JFrame {
         pwdContrasena = new javax.swing.JPasswordField();
         btnConfirmar = new javax.swing.JButton();
         btnRegistrarCliente = new javax.swing.JButton();
-        btnRegistrarPromotor = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,10 +48,8 @@ public class PantallaInicioSesion extends javax.swing.JFrame {
         btnConfirmar.setText("Confirmar");
         btnConfirmar.addActionListener(this::btnConfirmarActionPerformed);
 
-        btnRegistrarCliente.setText("Registrar Cliente");
-
-        btnRegistrarPromotor.setText("Registrar Promotor");
-        btnRegistrarPromotor.addActionListener(this::btnRegistrarPromotorActionPerformed);
+        btnRegistrarCliente.setText("Registrar Cuenta");
+        btnRegistrarCliente.addActionListener(this::btnRegistrarClienteActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -65,11 +62,8 @@ public class PantallaInicioSesion extends javax.swing.JFrame {
                     .addComponent(lblEmail)
                     .addComponent(txtEmail)
                     .addComponent(pwdContrasena)
-                    .addComponent(btnConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnRegistrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnRegistrarPromotor, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)))
+                    .addComponent(btnConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
+                    .addComponent(btnRegistrarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -86,9 +80,7 @@ public class PantallaInicioSesion extends javax.swing.JFrame {
                 .addGap(57, 57, 57)
                 .addComponent(btnConfirmar)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegistrarCliente)
-                    .addComponent(btnRegistrarPromotor))
+                .addComponent(btnRegistrarCliente)
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
@@ -107,9 +99,9 @@ public class PantallaInicioSesion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
-    private void btnRegistrarPromotorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarPromotorActionPerformed
+    private void btnRegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegistrarPromotorActionPerformed
+    }//GEN-LAST:event_btnRegistrarClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -139,7 +131,6 @@ public class PantallaInicioSesion extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmar;
     private javax.swing.JButton btnRegistrarCliente;
-    private javax.swing.JButton btnRegistrarPromotor;
     private javax.swing.JLabel lblCotrasena;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JPasswordField pwdContrasena;

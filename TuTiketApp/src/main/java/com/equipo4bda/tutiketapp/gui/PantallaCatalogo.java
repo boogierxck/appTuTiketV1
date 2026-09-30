@@ -28,21 +28,90 @@ public class PantallaCatalogo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        tblEventos = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        lblTituloCatalogo = new javax.swing.JLabel();
+        btnSeleccionarEvento = new javax.swing.JButton();
+        btnSaldoCuentaws = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Evento", "Edad Min.", "Ubicación", "Precio", "Disponibles"
+            }
+        ));
+        jTable1.setCellSelectionEnabled(true);
+        tblEventos.setViewportView(jTable1);
+        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+
+        lblTituloCatalogo.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
+        lblTituloCatalogo.setText("Catalogo de Eventos");
+
+        btnSeleccionarEvento.setText("Seleccionar Evento");
+        btnSeleccionarEvento.addActionListener(this::btnSeleccionarEventoActionPerformed);
+
+        btnSaldoCuentaws.setText("Saldo y Cuentas");
+        btnSaldoCuentaws.addActionListener(this::btnSaldoCuentawsActionPerformed);
+
+        jButton1.setText("Salir");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(224, 224, 224)
+                .addComponent(lblTituloCatalogo)
+                .addContainerGap(232, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tblEventos)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnSaldoCuentaws)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnSeleccionarEvento)))))
+                .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblTituloCatalogo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(tblEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSeleccionarEvento)
+                    .addComponent(btnSaldoCuentaws))
+                .addGap(21, 21, 21))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSeleccionarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarEventoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSeleccionarEventoActionPerformed
+
+    private void btnSaldoCuentawsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaldoCuentawsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSaldoCuentawsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -70,5 +139,11 @@ public class PantallaCatalogo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSaldoCuentaws;
+    private javax.swing.JButton btnSeleccionarEvento;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblTituloCatalogo;
+    private javax.swing.JScrollPane tblEventos;
     // End of variables declaration//GEN-END:variables
 }

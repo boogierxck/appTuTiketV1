@@ -30,12 +30,8 @@
                   <Component id="lblEmail" min="-2" max="-2" attributes="0"/>
                   <Component id="txtEmail" max="32767" attributes="0"/>
                   <Component id="pwdContrasena" alignment="0" max="32767" attributes="0"/>
-                  <Component id="btnConfirmar" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="btnRegistrarCliente" min="-2" pref="160" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnRegistrarPromotor" pref="155" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="btnConfirmar" pref="333" max="32767" attributes="0"/>
+                  <Component id="btnRegistrarCliente" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="37" max="32767" attributes="0"/>
           </Group>
@@ -55,10 +51,7 @@
               <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
               <Component id="btnConfirmar" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnRegistrarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnRegistrarPromotor" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="btnRegistrarCliente" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="41" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -95,15 +88,10 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnRegistrarCliente">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Registrar Cliente"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnRegistrarPromotor">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Registrar Promotor"/>
+        <Property name="text" type="java.lang.String" value="Registrar Cuenta"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistrarPromotorActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistrarClienteActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
