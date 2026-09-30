@@ -28,41 +28,41 @@ public class PantallaRendimientoAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        lblIDAdmin = new javax.swing.JLabel();
+        btnCrearEvento = new javax.swing.JButton();
+        btnRendimiento = new javax.swing.JButton();
+        btnEditarEvento = new javax.swing.JButton();
+        lblTituloRendimientoFinanciero = new javax.swing.JLabel();
+        pnlEventos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        tblEventos = new javax.swing.JTable();
+        lblTituloTotal = new javax.swing.JLabel();
+        lblTotalGanancias = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblTituloCuentas = new javax.swing.JLabel();
+        lblTituloMontos = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblCuentasBanco = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel2.setText("AD0000");
+        lblIDAdmin.setText("AD0000");
 
-        jButton1.setText("Crear Evento");
-        jButton1.setContentAreaFilled(false);
+        btnCrearEvento.setText("Crear Evento");
+        btnCrearEvento.setContentAreaFilled(false);
 
-        jButton2.setText("Rendimiento");
-        jButton2.setContentAreaFilled(false);
-        jButton2.addActionListener(this::jButton2ActionPerformed);
+        btnRendimiento.setText("Rendimiento");
+        btnRendimiento.setContentAreaFilled(false);
+        btnRendimiento.addActionListener(this::btnRendimientoActionPerformed);
 
-        jButton3.setText("Editar Evento");
-        jButton3.setContentAreaFilled(false);
+        btnEditarEvento.setText("Editar Evento");
+        btnEditarEvento.setContentAreaFilled(false);
 
-        jLabel1.setText("Rendimiento Financiero:");
+        lblTituloRendimientoFinanciero.setText("Rendimiento Financiero:");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnlEventos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblEventos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -81,45 +81,45 @@ public class PantallaRendimientoAdmin extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblEventos);
 
-        jLabel3.setText("Total de ganancias:");
+        lblTituloTotal.setText("Total de ganancias:");
 
-        jLabel4.setText("$0");
+        lblTotalGanancias.setText("$0");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlEventosLayout = new javax.swing.GroupLayout(pnlEventos);
+        pnlEventos.setLayout(pnlEventosLayout);
+        pnlEventosLayout.setHorizontalGroup(
+            pnlEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(pnlEventosLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jLabel3)
+                .addComponent(lblTituloTotal)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4)
+                .addComponent(lblTotalGanancias)
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        pnlEventosLayout.setVerticalGroup(
+            pnlEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEventosLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                .addGroup(pnlEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTituloTotal)
+                    .addComponent(lblTotalGanancias))
                 .addGap(48, 48, 48))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel5.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel5.setText("Cuentas");
+        lblTituloCuentas.setForeground(new java.awt.Color(153, 153, 153));
+        lblTituloCuentas.setText("Cuentas");
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setText("Montos");
+        lblTituloMontos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblTituloMontos.setText("Montos");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblCuentasBanco.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -127,7 +127,7 @@ public class PantallaRendimientoAdmin extends javax.swing.JFrame {
                 "Banco - Terminación", "Capital"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tblCuentasBanco);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -136,8 +136,8 @@ public class PantallaRendimientoAdmin extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
+                    .addComponent(lblTituloCuentas)
+                    .addComponent(lblTituloMontos))
                 .addGap(12, 12, 12)
                 .addComponent(jScrollPane2)
                 .addContainerGap())
@@ -149,9 +149,9 @@ public class PantallaRendimientoAdmin extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
+                        .addComponent(lblTituloCuentas)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel6)))
+                        .addComponent(lblTituloMontos)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -163,31 +163,31 @@ public class PantallaRendimientoAdmin extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2)
+                    .addComponent(lblIDAdmin)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(lblTituloRendimientoFinanciero)
                         .addGap(190, 190, 190)
-                        .addComponent(jButton2)
+                        .addComponent(btnRendimiento)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
+                        .addComponent(btnCrearEvento)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnEditarEvento))
+                    .addComponent(pnlEventos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel2)
+                .addComponent(lblIDAdmin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jLabel1))
+                    .addComponent(btnCrearEvento)
+                    .addComponent(btnRendimiento)
+                    .addComponent(btnEditarEvento)
+                    .addComponent(lblTituloRendimientoFinanciero))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -196,9 +196,9 @@ public class PantallaRendimientoAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnRendimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRendimientoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnRendimientoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -226,20 +226,20 @@ public class PantallaRendimientoAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton btnCrearEvento;
+    private javax.swing.JButton btnEditarEvento;
+    private javax.swing.JButton btnRendimiento;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JLabel lblIDAdmin;
+    private javax.swing.JLabel lblTituloCuentas;
+    private javax.swing.JLabel lblTituloMontos;
+    private javax.swing.JLabel lblTituloRendimientoFinanciero;
+    private javax.swing.JLabel lblTituloTotal;
+    private javax.swing.JLabel lblTotalGanancias;
+    private javax.swing.JPanel pnlEventos;
+    private javax.swing.JTable tblCuentasBanco;
+    private javax.swing.JTable tblEventos;
     // End of variables declaration//GEN-END:variables
 }
