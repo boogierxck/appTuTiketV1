@@ -20,16 +20,14 @@ import java.util.List;
 public class EventoDAO {
 
     public int insertar(Connection conexion, Evento evento) throws SQLException {
-        String sql = "INSERT INTO evento (id_promotora, id_tipo_evento, nombre_evento, cantidad_boletos, edad_minima, precio_boleto, id_cuenta_promotora) VALUES (?, ?, ?, ?, ?, ?, ?)";
-
+        String sql = "INSERT INTO evento (id_promotora, id_tipo_evento, nombre_evento, cantidad_boletos, edad_minima, precio_boleto) VALUES (?, ?, ?, ?, ?, ?)";        
         try (PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, evento.getIdPromotora());
             ps.setInt(2, evento.getIdTipoEvento());
             ps.setString(3, evento.getNombreEvento());
             ps.setInt(4, evento.getCantidadBoletos());
             ps.setInt(5, evento.getEdadMinima());
-            ps.setBigDecimal(6, evento.getPrecioBoleto());
-            ps.setInt(7, evento.getIdCuentaPromotora());
+            ps.setDouble(6, evento.getPrecioBoleto());
 
             ps.executeUpdate();
 
@@ -54,7 +52,6 @@ public class EventoDAO {
                        e.cantidad_boletos,
                        e.edad_minima,
                        e.precio_boleto,
-                       e.id_cuenta_promotora,
                        c.nombre_tipo_evento,
                        (SELECT COUNT(*) FROM boleto b WHERE b.id_evento = e.id_evento AND b.estatus = 'DISPONIBLE') AS disponibles
                 FROM evento e
@@ -63,7 +60,7 @@ public class EventoDAO {
                 """;
 
         try (Connection conexion = ConexionBD.crearConexion(); PreparedStatement ps = conexion.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
-            while (rs.next()) {
+           while (rs.next()) {
                 Evento evento = new Evento();
 
                 evento.setIdEvento(rs.getInt("id_evento"));
@@ -72,8 +69,7 @@ public class EventoDAO {
                 evento.setNombreEvento(rs.getString("nombre_evento"));
                 evento.setCantidadBoletos(rs.getInt("cantidad_boletos"));
                 evento.setEdadMinima(rs.getInt("edad_minima"));
-                evento.setPrecioBoleto(rs.getBigDecimal("precio_boleto"));
-                evento.setIdCuentaPromotora(rs.getInt("id_cuenta_promotora"));
+                evento.setPrecioBoleto(rs.getDouble("precio_boleto"));
                 evento.setNombreTipoEvento(rs.getString("nombre_tipo_evento"));
                 evento.setBoletosDisponibles(rs.getInt("disponibles"));
 

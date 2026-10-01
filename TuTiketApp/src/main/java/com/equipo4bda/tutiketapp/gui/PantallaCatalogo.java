@@ -145,7 +145,14 @@ public class PantallaCatalogo extends javax.swing.JFrame {
             modelo.setRowCount(0);
 
             for (Evento evento : eventos) {
-                modelo.addRow(new Object[]{evento.getNombreEvento(), evento.getNombreTipoEvento(), "N/D", "N/D", "N/D", evento.getBoletosDisponibles()});
+                modelo.addRow(new Object[]{
+                    evento.getNombreEvento(),
+                    evento.getNombreTipoEvento(),
+                    evento.getEdadMinima(),
+                    "N/D",
+                    "$" + evento.getPrecioBoleto(),
+                    evento.getBoletosDisponibles()
+                });
             }
 
         } catch (Exception e) {

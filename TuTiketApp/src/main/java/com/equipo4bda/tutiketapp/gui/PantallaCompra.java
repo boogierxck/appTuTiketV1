@@ -15,7 +15,10 @@ import com.equipo4bda.tutiketapp.negocio.SesionActual;
 import com.equipo4bda.tutiketapp.negocio.SesionUsuario;
 import java.util.List;
 import javax.swing.JOptionPane;
+import com.equipo4bda.tutiketapp.negocio.GestorCompras;
+import java.math.BigDecimal;
 public class PantallaCompra extends javax.swing.JFrame {
+    private final GestorCompras gestorCompras = new GestorCompras();
     private final GestorCuentas gestorCuentas = new GestorCuentas();
     private List<CuentaCliente> cuentas;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PantallaCompra.class.getName());
@@ -179,21 +182,21 @@ public class PantallaCompra extends javax.swing.JFrame {
                                     .addGap(1, 1, 1)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(lblTituloEvento)
-                                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                                    .addComponent(lblCVV)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(pwdCVV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addGap(0, 0, Short.MAX_VALUE))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
                                             .addComponent(lblCantidadBoletos)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(cmbCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                             .addComponent(lblCuentaBancaria)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(cmbCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
+                                            .addComponent(cmbCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(lblTituloEvento)
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                    .addComponent(lblCVV)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(pwdCVV, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGap(0, 0, Short.MAX_VALUE))))))))
                 .addGap(23, 23, 23))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
@@ -271,11 +274,59 @@ public class PantallaCompra extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmbCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCantidadActionPerformed
-        // TODO add your handling code here:
+        actualizarTotales();
     }//GEN-LAST:event_cmbCantidadActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         JOptionPane.showMessageDialog(this, "La compra aún no puede completarse porque la base de datos no contiene el precio del boleto.");
+        try {
+            SesionUsuario sesion = SesionActual.getSesion();
+            Evento evento = SesionActual.getEventoSeleccionado();
+
+            if (sesion == null) {
+                JOptionPane.showMessageDialog(this, "No hay una sesión activa.");
+                return;
+            }
+
+            if (evento == null) {
+                JOptionPane.showMessageDialog(this, "No hay un evento seleccionado.");
+                return;
+            }
+
+            int indiceCuenta = cmbCuenta.getSelectedIndex();
+
+            if (indiceCuenta == -1 || cuentas == null || cuentas.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Selecciona una cuenta bancaria.");
+                return;
+            }
+
+            String cvv = new String(pwdCVV.getPassword());
+
+            if (!cvv.matches("\\d{3}")) {
+                JOptionPane.showMessageDialog(this, "El CVV debe contener exactamente 3 números.");
+                return;
+            }
+
+            int cantidad = Integer.parseInt(String.valueOf(cmbCantidad.getSelectedItem()));
+
+            if (cantidad > evento.getBoletosDisponibles()) {
+                JOptionPane.showMessageDialog(this, "No hay suficientes boletos disponibles.");
+                return;
+            }
+
+            CuentaCliente cuentaSeleccionada = cuentas.get(indiceCuenta);
+
+            BigDecimal total = gestorCompras.realizarCompra(sesion.getIdUsuario(), cuentaSeleccionada.getIdCuentaCliente(), evento, cantidad);
+
+            JOptionPane.showMessageDialog(this, "Compra realizada correctamente.\nTotal cobrado: $" + total);
+
+            evento.setBoletosDisponibles(evento.getBoletosDisponibles() - cantidad);
+
+            cargarCuentas();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error de compra", JOptionPane.ERROR_MESSAGE);
+    }
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void cmbCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCuentaActionPerformed
@@ -297,7 +348,26 @@ public class PantallaCompra extends javax.swing.JFrame {
         lblEventoSeleccionado.setText(evento.getNombreEvento());
         lblIDEvento.setText("EV-" + evento.getIdEvento());
         lblLugarEvento.setText("N/D");
-        lblPrecioEvento.setText("N/D");
+        lblPrecioEvento.setText("$" + evento.getPrecioBoleto());
+    }
+
+    private void actualizarTotales() {
+        Evento evento = SesionActual.getEventoSeleccionado();
+
+        if (evento == null) {
+            return;
+        }
+
+        int cantidad = Integer.parseInt(String.valueOf(cmbCantidad.getSelectedItem()));
+        double precio = evento.getPrecioBoleto();
+
+        double subtotal = precio * cantidad;
+        double cargoServicio = subtotal * 0.10;
+        double total = subtotal + cargoServicio;
+
+        lblSubtotalPesos.setText(String.format("$%.2f", subtotal));
+        lblCargoServicioPesos.setText(String.format("$%.2f", cargoServicio));
+        lblTotalPesos.setText(String.format("$%.2f", total));
     }
     
     private void cargarCuentas() {

@@ -11,6 +11,9 @@ package com.equipo4bda.tutiketapp.persistencia;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BoletoDAO {
 
@@ -28,6 +31,37 @@ public class BoletoDAO {
             }
 
             ps.executeBatch();
+        }
+    }
+    
+    public List<Integer> obtenerBoletosDisponibles(Connection conexion, int idEvento, int cantidad) throws SQLException {
+        List<Integer> boletos = new ArrayList<>();
+
+        String sql = "SELECT id_boleto FROM boleto WHERE id_evento = ? AND estatus = 'DISPONIBLE' ORDER BY id_boleto LIMIT ? FOR UPDATE";
+
+        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+            ps.setInt(1, idEvento);
+            ps.setInt(2, cantidad);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    boletos.add(rs.getInt("id_boleto"));
+                }
+            }
+        }
+
+        return boletos;
+    }
+    
+    public void marcarComoComprado(Connection conexion, int idBoleto) throws SQLException {
+        String sql = "UPDATE boleto SET estatus = 'COMPRADO' WHERE id_boleto = ? AND estatus = 'DISPONIBLE'";
+
+        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+            ps.setInt(1, idBoleto);
+
+            if (ps.executeUpdate() != 1) {
+                throw new SQLException("El boleto ya no está disponible.");
+            }
         }
     }
 }

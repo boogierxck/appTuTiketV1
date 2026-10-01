@@ -29,8 +29,7 @@ public class GestorEventos {
         return eventoDAO.obtenerTodos();
     }
 
-    public void crearEvento(int idPromotora, int idTipoEvento, String nombre, int cantidadBoletos) throws Exception {
-        if (nombre == null || nombre.isBlank()) {
+    public void crearEvento(int idPromotora, int idTipoEvento, String nombre, int edadMinima, int cantidadBoletos, double precioBoleto) throws Exception {        if (nombre == null || nombre.isBlank()) {
             throw new IllegalArgumentException("El nombre del evento es obligatorio.");
         }
 
@@ -39,10 +38,13 @@ public class GestorEventos {
         }
 
         Evento evento = new Evento();
+
         evento.setIdPromotora(idPromotora);
         evento.setIdTipoEvento(idTipoEvento);
         evento.setNombreEvento(nombre);
+        evento.setEdadMinima(edadMinima);
         evento.setCantidadBoletos(cantidadBoletos);
+        evento.setPrecioBoleto(precioBoleto);
 
         Connection conexion = null;
 

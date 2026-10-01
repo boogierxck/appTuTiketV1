@@ -192,8 +192,7 @@ public class PantallaCrearEvento extends javax.swing.JFrame {
                 return;
             }
 
-            gestorEventos.crearEvento(sesion.getIdPromotora(), idTipoEvento, nombre, cantidadBoletos);
-
+            gestorEventos.crearEvento(sesion.getIdPromotora(), idTipoEvento, nombre, edadMinima, cantidadBoletos, precio);
             JOptionPane.showMessageDialog(this, "Evento creado correctamente.");
 
             dispose();

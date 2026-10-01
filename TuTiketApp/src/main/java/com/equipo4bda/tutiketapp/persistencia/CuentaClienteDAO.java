@@ -53,4 +53,33 @@ public class CuentaClienteDAO {
 
         return cuentas;
     }
+    
+    public boolean descontarSaldo(Connection conexion, int idCuentaCliente, int idCliente, BigDecimal monto) throws SQLException {
+    String sql = "UPDATE cuenta_cliente SET saldo = saldo - ? WHERE id_cuenta_cliente = ? AND id_cliente = ? AND saldo >= ?";
+
+        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+            ps.setBigDecimal(1, monto);
+            ps.setInt(2, idCuentaCliente);
+            ps.setInt(3, idCliente);
+            ps.setBigDecimal(4, monto);
+
+            return ps.executeUpdate() == 1;
+        }
+    }
+    
+    public BigDecimal obtenerSaldo(Connection conexion, int idCuentaCliente) throws SQLException {
+        String sql = "SELECT saldo FROM cuenta_cliente WHERE id_cuenta_cliente = ?";
+
+        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+            ps.setInt(1, idCuentaCliente);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getBigDecimal("saldo");
+                }
+            }
+        }
+
+        throw new SQLException("No se encontró la cuenta.");
+    }
 }

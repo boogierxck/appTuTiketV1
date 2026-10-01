@@ -18,9 +18,8 @@ public class Evento {
     private String nombreEvento;
     private int cantidadBoletos;
     private int edadMinima;
-    private BigDecimal precioBoleto;
+    private double precioBoleto;
     private int idCuentaPromotora;
-
     private String nombreTipoEvento;
     private int boletosDisponibles;
 
@@ -75,11 +74,11 @@ public class Evento {
         this.edadMinima = edadMinima;
     }
 
-    public BigDecimal getPrecioBoleto() {
+    public double getPrecioBoleto() {
         return precioBoleto;
     }
 
-    public void setPrecioBoleto(BigDecimal precioBoleto) {
+    public void setPrecioBoleto(double precioBoleto) {
         this.precioBoleto = precioBoleto;
     }
 
