@@ -43,6 +43,7 @@ public class PantallaRendimientoAdmin extends javax.swing.JFrame {
         lblTituloMontos = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblCuentasBanco = new javax.swing.JTable();
+        btnActualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,6 +51,7 @@ public class PantallaRendimientoAdmin extends javax.swing.JFrame {
 
         btnCrearEvento.setText("Crear Evento");
         btnCrearEvento.setContentAreaFilled(false);
+        btnCrearEvento.addActionListener(this::btnCrearEventoActionPerformed);
 
         btnRendimiento.setText("Rendimiento");
         btnRendimiento.setContentAreaFilled(false);
@@ -57,6 +59,7 @@ public class PantallaRendimientoAdmin extends javax.swing.JFrame {
 
         btnEditarEvento.setText("Editar Evento");
         btnEditarEvento.setContentAreaFilled(false);
+        btnEditarEvento.addActionListener(this::btnEditarEventoActionPerformed);
 
         lblTituloRendimientoFinanciero.setText("Rendimiento Financiero:");
 
@@ -155,6 +158,9 @@ public class PantallaRendimientoAdmin extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(this::btnActualizarActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -163,7 +169,10 @@ public class PantallaRendimientoAdmin extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblIDAdmin)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblIDAdmin)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnActualizar))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(lblTituloRendimientoFinanciero)
                         .addGap(190, 190, 190)
@@ -173,13 +182,15 @@ public class PantallaRendimientoAdmin extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEditarEvento))
                     .addComponent(pnlEventos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(lblIDAdmin)
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblIDAdmin)
+                    .addComponent(btnActualizar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCrearEvento)
@@ -199,6 +210,20 @@ public class PantallaRendimientoAdmin extends javax.swing.JFrame {
     private void btnRendimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRendimientoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRendimientoActionPerformed
+
+    private void btnCrearEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearEventoActionPerformed
+        PantallaCrearEvento pantallaCrear = new PantallaCrearEvento();
+        pantallaCrear.setVisible(true);
+    }//GEN-LAST:event_btnCrearEventoActionPerformed
+
+    private void btnEditarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarEventoActionPerformed
+        PantallaModificarEvento pantallaEditar = new PantallaModificarEvento();
+        pantallaEditar.setVisible(true);
+    }//GEN-LAST:event_btnEditarEventoActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnActualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -226,6 +251,7 @@ public class PantallaRendimientoAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnCrearEvento;
     private javax.swing.JButton btnEditarEvento;
     private javax.swing.JButton btnRendimiento;

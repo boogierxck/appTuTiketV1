@@ -38,6 +38,7 @@ public class PantallaInicioSesion extends javax.swing.JFrame {
         pwdContrasena = new javax.swing.JPasswordField();
         btnConfirmar = new javax.swing.JButton();
         btnRegistrarCliente = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,25 +56,35 @@ public class PantallaInicioSesion extends javax.swing.JFrame {
         btnRegistrarCliente.setText("Registrar Cuenta");
         btnRegistrarCliente.addActionListener(this::btnRegistrarClienteActionPerformed);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jLabel1.setText("Bienvenido a TuTiket");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblCotrasena)
-                    .addComponent(lblEmail)
-                    .addComponent(txtEmail)
-                    .addComponent(pwdContrasena)
-                    .addComponent(btnConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
-                    .addComponent(btnRegistrarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblCotrasena)
+                            .addComponent(lblEmail)
+                            .addComponent(txtEmail)
+                            .addComponent(pwdContrasena)
+                            .addComponent(btnConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
+                            .addComponent(btnRegistrarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(130, 130, 130)
+                        .addComponent(jLabel1)))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(10, 10, 10)
                 .addComponent(lblEmail)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -85,7 +96,7 @@ public class PantallaInicioSesion extends javax.swing.JFrame {
                 .addComponent(btnConfirmar)
                 .addGap(18, 18, 18)
                 .addComponent(btnRegistrarCliente)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
@@ -159,6 +170,7 @@ public class PantallaInicioSesion extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmar;
     private javax.swing.JButton btnRegistrarCliente;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblCotrasena;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JPasswordField pwdContrasena;
