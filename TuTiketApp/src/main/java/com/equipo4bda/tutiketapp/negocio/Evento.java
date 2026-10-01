@@ -8,6 +8,7 @@ package com.equipo4bda.tutiketapp.negocio;
  *
  * @author armen
  */
+import java.math.BigDecimal;
 
 public class Evento {
 
@@ -16,6 +17,10 @@ public class Evento {
     private int idTipoEvento;
     private String nombreEvento;
     private int cantidadBoletos;
+    private int edadMinima;
+    private BigDecimal precioBoleto;
+    private int idCuentaPromotora;
+
     private String nombreTipoEvento;
     private int boletosDisponibles;
 
@@ -60,6 +65,30 @@ public class Evento {
 
     public void setCantidadBoletos(int cantidadBoletos) {
         this.cantidadBoletos = cantidadBoletos;
+    }
+
+    public int getEdadMinima() {
+        return edadMinima;
+    }
+
+    public void setEdadMinima(int edadMinima) {
+        this.edadMinima = edadMinima;
+    }
+
+    public BigDecimal getPrecioBoleto() {
+        return precioBoleto;
+    }
+
+    public void setPrecioBoleto(BigDecimal precioBoleto) {
+        this.precioBoleto = precioBoleto;
+    }
+
+    public int getIdCuentaPromotora() {
+        return idCuentaPromotora;
+    }
+
+    public void setIdCuentaPromotora(int idCuentaPromotora) {
+        this.idCuentaPromotora = idCuentaPromotora;
     }
 
     public String getNombreTipoEvento() {

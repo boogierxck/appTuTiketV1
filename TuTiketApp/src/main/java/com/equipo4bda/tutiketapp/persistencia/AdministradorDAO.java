@@ -39,4 +39,19 @@ public class AdministradorDAO {
 
         return null;
     }
+    
+    public void insertar(Administrador administrador) throws SQLException {
+        String sql = "INSERT INTO administrador (id_promotora, nombres, paterno, materno, usuario, `contraseña_hash`) VALUES (?, ?, ?, ?, ?, ?)";
+
+        try (Connection conexion = ConexionBD.crearConexion(); PreparedStatement ps = conexion.prepareStatement(sql)) {
+            ps.setInt(1, administrador.getIdPromotora());
+            ps.setString(2, administrador.getNombres());
+            ps.setString(3, administrador.getPaterno());
+            ps.setString(4, administrador.getMaterno());
+            ps.setString(5, administrador.getUsuario());
+            ps.setString(6, administrador.getContrasenaHash());
+
+            ps.executeUpdate();
+        }
+    }
 }

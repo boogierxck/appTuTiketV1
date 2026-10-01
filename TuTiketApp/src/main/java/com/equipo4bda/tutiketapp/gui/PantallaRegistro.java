@@ -12,8 +12,10 @@ import com.equipo4bda.tutiketapp.negocio.GestorClientes;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
+import com.equipo4bda.tutiketapp.negocio.GestorAdministradores;
 public class PantallaRegistro extends javax.swing.JFrame {
     private final GestorClientes gestorClientes = new GestorClientes();
+    private final GestorAdministradores gestorAdministradores = new GestorAdministradores();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PantallaRegistro.class.getName());
 
     /**
@@ -21,8 +23,7 @@ public class PantallaRegistro extends javax.swing.JFrame {
      */
     public PantallaRegistro() {
         initComponents();
-        btnConfirmar.addActionListener(e -> registrar());
-        btnAtras.addActionListener(e -> volver());
+        
     }
 
     /**
@@ -190,6 +191,8 @@ public class PantallaRegistro extends javax.swing.JFrame {
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         try {
+            String tipoUsuario = String.valueOf(cmbTipoUsuario.getSelectedItem());
+
             String nombres = txtNomrbes.getText().trim();
             String paterno = txtApellidoPaterno.getText().trim();
             String materno = txtApellidoMaterno.getText().trim();
@@ -197,8 +200,8 @@ public class PantallaRegistro extends javax.swing.JFrame {
             String contrasena = new String(txtContrasena.getPassword());
             String confirmarContrasena = new String(txtConfirmaContrasena.getPassword());
 
-            if (nombres.isBlank() || paterno.isBlank() || usuario.isBlank() || contrasena.isBlank() || confirmarContrasena.isBlank()) {
-                JOptionPane.showMessageDialog(this, "Completa todos los campos obligatorios.", "Registro", JOptionPane.WARNING_MESSAGE);
+            if (nombres.isBlank() || paterno.isBlank() || materno.isBlank() || usuario.isBlank() || contrasena.isBlank() || confirmarContrasena.isBlank()) {
+                JOptionPane.showMessageDialog(this, "Completa todos los campos.", "Registro", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
@@ -207,11 +210,27 @@ public class PantallaRegistro extends javax.swing.JFrame {
                 return;
             }
 
-            LocalDate fechaNacimiento = LocalDate.parse(txtFechaNacimiento.getText().trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            if (tipoUsuario.equals("Cliente")) {
+                String fechaTexto = txtFechaNacimiento.getText().trim();
 
-            gestorClientes.registrarCliente(nombres, paterno, usuario, contrasena, fechaNacimiento);
+                if (fechaTexto.isBlank()) {
+                    JOptionPane.showMessageDialog(this, "Ingresa la fecha de nacimiento.", "Registro", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
 
-            JOptionPane.showMessageDialog(this, "Cliente registrado correctamente.", "Registro", JOptionPane.INFORMATION_MESSAGE);
+                LocalDate fechaNacimiento = LocalDate.parse(fechaTexto, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+                gestorClientes.registrarCliente(nombres, paterno, usuario, contrasena, fechaNacimiento);
+
+                JOptionPane.showMessageDialog(this, "Cliente registrado correctamente.");
+
+            } else if (tipoUsuario.equals("Administrador")) {
+                int idPromotora = 1;
+
+                gestorAdministradores.registrarAdministrador(idPromotora, nombres, paterno, materno, usuario, contrasena);
+
+                JOptionPane.showMessageDialog(this, "Administrador registrado correctamente.");
+            }
 
             dispose();
 

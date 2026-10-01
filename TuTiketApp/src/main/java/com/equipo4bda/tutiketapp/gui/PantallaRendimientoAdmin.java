@@ -8,8 +8,16 @@ package com.equipo4bda.tutiketapp.gui;
  *
  * @author lui
  */
+import com.equipo4bda.tutiketapp.negocio.Evento;
+import com.equipo4bda.tutiketapp.negocio.GestorEventos;
+import com.equipo4bda.tutiketapp.negocio.SesionActual;
+import com.equipo4bda.tutiketapp.negocio.SesionUsuario;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 public class PantallaRendimientoAdmin extends javax.swing.JFrame {
-    
+    private final GestorEventos gestorEventos = new GestorEventos();
+    private List<Evento> eventos;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PantallaRendimientoAdmin.class.getName());
 
     /**
@@ -17,6 +25,9 @@ public class PantallaRendimientoAdmin extends javax.swing.JFrame {
      */
     public PantallaRendimientoAdmin() {
         initComponents();
+        cargarAdministrador();
+        cargarEventos();
+        
     }
 
     /**
@@ -208,23 +219,81 @@ public class PantallaRendimientoAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRendimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRendimientoActionPerformed
-        // TODO add your handling code here:
+        cargarEventos();
     }//GEN-LAST:event_btnRendimientoActionPerformed
 
     private void btnCrearEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearEventoActionPerformed
         PantallaCrearEvento pantallaCrear = new PantallaCrearEvento();
+        pantallaCrear.setLocationRelativeTo(null);
         pantallaCrear.setVisible(true);
     }//GEN-LAST:event_btnCrearEventoActionPerformed
 
     private void btnEditarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarEventoActionPerformed
+        int fila = tblEventos.getSelectedRow();
+
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Selecciona un evento para editar.", "Editar evento", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int idEvento = (int) tblEventos.getValueAt(fila, 0);
+
+        Evento seleccionado = null;
+
+        for (Evento evento : eventos) {
+            if (evento.getIdEvento() == idEvento) {
+                seleccionado = evento;
+                break;
+            }
+        }
+
+        if (seleccionado == null) {
+            JOptionPane.showMessageDialog(this, "No se encontró el evento.");
+            return;
+        }
+
+        SesionActual.setEventoSeleccionado(seleccionado);
+
         PantallaModificarEvento pantallaEditar = new PantallaModificarEvento();
+        pantallaEditar.setLocationRelativeTo(null);
         pantallaEditar.setVisible(true);
     }//GEN-LAST:event_btnEditarEventoActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        // TODO add your handling code here:
+        cargarEventos();
     }//GEN-LAST:event_btnActualizarActionPerformed
+    
+    private void cargarAdministrador() {
+        SesionUsuario sesion = SesionActual.getSesion();
 
+        if (sesion != null) {
+            lblIDAdmin.setText("Administrador: " + sesion.getIdUsuario());
+        }
+    }
+    
+    private void cargarEventos() {
+        try {
+            SesionUsuario sesion = SesionActual.getSesion();
+
+            if (sesion == null) {
+                return;
+            }
+
+            eventos = gestorEventos.obtenerEventos();
+
+            DefaultTableModel modelo = (DefaultTableModel) tblEventos.getModel();
+            modelo.setRowCount(0);
+
+            for (Evento evento : eventos) {
+                if (evento.getIdPromotora() == sesion.getIdPromotora()) {
+                    modelo.addRow(new Object[]{evento.getIdEvento(), evento.getNombreEvento(), evento.getIdPromotora(), "N/D", "N/D"});
+                }
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al cargar eventos: " + e.getMessage());
+        }
+    }
     /**
      * @param args the command line arguments
      */

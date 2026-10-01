@@ -8,8 +8,12 @@ package com.equipo4bda.tutiketapp.gui;
  *
  * @author lui
  */
+import com.equipo4bda.tutiketapp.negocio.Evento;
+import com.equipo4bda.tutiketapp.negocio.GestorEventos;
+import com.equipo4bda.tutiketapp.negocio.SesionActual;
+import javax.swing.JOptionPane;
 public class PantallaModificarEvento extends javax.swing.JFrame {
-    
+    private final GestorEventos gestorEventos = new GestorEventos();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PantallaModificarEvento.class.getName());
 
     /**
@@ -17,6 +21,7 @@ public class PantallaModificarEvento extends javax.swing.JFrame {
      */
     public PantallaModificarEvento() {
         initComponents();
+        cargarEvento();
     }
 
     /**
@@ -62,13 +67,18 @@ public class PantallaModificarEvento extends javax.swing.JFrame {
 
         jLabel5.setText("Edad mín:");
 
+        jTextField2.addActionListener(this::jTextField2ActionPerformed);
+
         jLabel6.setText("Cantidad de boletos:");
 
         jLabel7.setText("Precio boleto:");
 
+        jComboBox2.addActionListener(this::jComboBox2ActionPerformed);
+
         jLabel8.setText("Cuenta asociada para ganancias:");
 
         btnGuardarEvento.setText("Guardar evento");
+        btnGuardarEvento.addActionListener(this::btnGuardarEventoActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,31 +97,29 @@ public class PantallaModificarEvento extends javax.swing.JFrame {
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextField1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel5)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel8)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel6)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jLabel7)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(0, 22, Short.MAX_VALUE))))
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel8)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel6)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabel7)
+                                    .addGap(295, 295, 295)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabel5)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnGuardarEvento)))
@@ -156,6 +164,53 @@ public class PantallaModificarEvento extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void btnGuardarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarEventoActionPerformed
+        try {
+            Evento evento = SesionActual.getEventoSeleccionado();
+
+            if (evento == null) {
+                JOptionPane.showMessageDialog(this, "No hay un evento seleccionado.");
+                return;
+            }
+
+            evento.setNombreEvento(jTextField1.getText().trim());
+            evento.setIdTipoEvento(jComboBox1.getSelectedIndex() + 1);
+            evento.setCantidadBoletos(Integer.parseInt(jTextField3.getText().trim()));
+
+            gestorEventos.modificarEvento(evento);
+
+            JOptionPane.showMessageDialog(this, "Evento actualizado correctamente.");
+
+            dispose();
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "La cantidad de boletos debe ser numérica.");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnGuardarEventoActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+   
+    private void cargarEvento() {
+        Evento evento = SesionActual.getEventoSeleccionado();
+
+        if (evento == null) {
+            JOptionPane.showMessageDialog(this, "No hay un evento seleccionado.");
+            return;
+        }
+
+        jTextField1.setText(evento.getNombreEvento());
+        jComboBox1.setSelectedIndex(evento.getIdTipoEvento() - 1);
+        jTextField3.setText(String.valueOf(evento.getCantidadBoletos()));
+    }
     /**
      * @param args the command line arguments
      */

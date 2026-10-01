@@ -8,8 +8,15 @@ package com.equipo4bda.tutiketapp.gui;
  *
  * @author lui
  */
+import com.equipo4bda.tutiketapp.negocio.CuentaCliente;
+import com.equipo4bda.tutiketapp.negocio.GestorCuentas;
+import com.equipo4bda.tutiketapp.negocio.SesionActual;
+import com.equipo4bda.tutiketapp.negocio.SesionUsuario;
+import java.math.BigDecimal;
+import java.util.List;
+import javax.swing.JOptionPane;
 public class PantallaSaldos extends javax.swing.JFrame {
-    
+    private final GestorCuentas gestorCuentas = new GestorCuentas();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PantallaSaldos.class.getName());
 
     /**
@@ -17,6 +24,8 @@ public class PantallaSaldos extends javax.swing.JFrame {
      */
     public PantallaSaldos() {
         initComponents();
+        cargarCuentas();
+        
     }
 
     /**
@@ -234,7 +243,65 @@ public class PantallaSaldos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void cargarCuentas() {
+        try {
+            SesionUsuario sesion = SesionActual.getSesion();
 
+            if (sesion == null) {
+                JOptionPane.showMessageDialog(this, "No hay una sesión activa.");
+                dispose();
+                return;
+            }
+
+            List<CuentaCliente> cuentas = gestorCuentas.obtenerCuentasCliente(sesion.getIdUsuario());
+
+            lblNCuentas.setText(String.valueOf(cuentas.size()));
+
+            lblBanco.setText("-");
+            lblCuenta.setText("Cuenta: -");
+            lblSaldo.setText("$0.00");
+
+            lblBanco1.setText("-");
+            lblCuenta1.setText("Cuenta: -");
+            lblSaldo1.setText("$0.00");
+
+            lblBanco2.setText("-");
+            lblCuenta2.setText("Cuenta: -");
+            lblSaldo2.setText("$0.00");
+
+            BigDecimal saldoTotal = BigDecimal.ZERO;
+
+            if (cuentas.size() > 0) {
+                CuentaCliente cuenta = cuentas.get(0);
+                lblBanco.setText(cuenta.getBanco());
+                lblCuenta.setText("Cuenta: " + cuenta.getNumCuenta());
+                lblSaldo.setText("$" + cuenta.getSaldo());
+                saldoTotal = saldoTotal.add(cuenta.getSaldo());
+            }
+
+            if (cuentas.size() > 1) {
+                CuentaCliente cuenta = cuentas.get(1);
+                lblBanco1.setText(cuenta.getBanco());
+                lblCuenta1.setText("Cuenta: " + cuenta.getNumCuenta());
+                lblSaldo1.setText("$" + cuenta.getSaldo());
+                saldoTotal = saldoTotal.add(cuenta.getSaldo());
+            }
+
+            if (cuentas.size() > 2) {
+                CuentaCliente cuenta = cuentas.get(2);
+                lblBanco2.setText(cuenta.getBanco());
+                lblCuenta2.setText("Cuenta: " + cuenta.getNumCuenta());
+                lblSaldo2.setText("$" + cuenta.getSaldo());
+                saldoTotal = saldoTotal.add(cuenta.getSaldo());
+            }
+
+            jLabel1.setText("$" + saldoTotal + " MXN");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al consultar las cuentas: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     /**
      * @param args the command line arguments
      */

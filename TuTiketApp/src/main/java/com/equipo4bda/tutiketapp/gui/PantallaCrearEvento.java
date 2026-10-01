@@ -8,13 +8,18 @@ package com.equipo4bda.tutiketapp.gui;
  *
  * @author lui
  */
+import com.equipo4bda.tutiketapp.negocio.GestorEventos;
+import com.equipo4bda.tutiketapp.negocio.SesionActual;
+import com.equipo4bda.tutiketapp.negocio.SesionUsuario;
+import javax.swing.JOptionPane;
 public class PantallaCrearEvento extends javax.swing.JFrame {
-    
+    private final GestorEventos gestorEventos = new GestorEventos();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PantallaCrearEvento.class.getName());
 
     /**
      * Creates new form PantallaCrearEvento
      */
+    
     public PantallaCrearEvento() {
         initComponents();
     }
@@ -69,9 +74,12 @@ public class PantallaCrearEvento extends javax.swing.JFrame {
 
         jLabel7.setText("Tipo de evento:");
 
+        jComboBox2.addActionListener(this::jComboBox2ActionPerformed);
+
         jLabel8.setText("Cuenta asociada para ganancias:");
 
         btnCrearEvento.setText("Crear evento");
+        btnCrearEvento.addActionListener(this::btnCrearEventoActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -154,6 +162,53 @@ public class PantallaCrearEvento extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void btnCrearEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearEventoActionPerformed
+        try {
+            SesionUsuario sesion = SesionActual.getSesion();
+
+            if (sesion == null || sesion.getTipo() != SesionUsuario.Tipo.ADMINISTRADOR) {
+                JOptionPane.showMessageDialog(this, "Debes iniciar sesión como administrador.", "Evento", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            String nombre = jTextField1.getText().trim();
+            String edadTexto = jTextField2.getText().trim();
+            String cantidadTexto = jTextField3.getText().trim();
+            String precioTexto = jTextField4.getText().trim();
+
+            if (nombre.isBlank() || edadTexto.isBlank() || cantidadTexto.isBlank() || precioTexto.isBlank()) {
+                JOptionPane.showMessageDialog(this, "Completa todos los campos.", "Evento", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            int edadMinima = Integer.parseInt(edadTexto);
+            int cantidadBoletos = Integer.parseInt(cantidadTexto);
+            double precio = Double.parseDouble(precioTexto);
+            int idTipoEvento = jComboBox1.getSelectedIndex() + 1;
+
+            if (edadMinima < 0 || cantidadBoletos <= 0 || precio < 0) {
+                JOptionPane.showMessageDialog(this, "Revisa edad, cantidad de boletos y precio.", "Evento", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            gestorEventos.crearEvento(sesion.getIdPromotora(), idTipoEvento, nombre, cantidadBoletos);
+
+            JOptionPane.showMessageDialog(this, "Evento creado correctamente.");
+
+            dispose();
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Edad, cantidad y precio deben ser números.", "Evento", JOptionPane.WARNING_MESSAGE);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnCrearEventoActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
 
     /**
      * @param args the command line arguments

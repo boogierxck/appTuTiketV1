@@ -8,8 +8,16 @@ package com.equipo4bda.tutiketapp.gui;
  *
  * @author lui
  */
+import com.equipo4bda.tutiketapp.negocio.CuentaCliente;
+import com.equipo4bda.tutiketapp.negocio.Evento;
+import com.equipo4bda.tutiketapp.negocio.GestorCuentas;
+import com.equipo4bda.tutiketapp.negocio.SesionActual;
+import com.equipo4bda.tutiketapp.negocio.SesionUsuario;
+import java.util.List;
+import javax.swing.JOptionPane;
 public class PantallaCompra extends javax.swing.JFrame {
-    
+    private final GestorCuentas gestorCuentas = new GestorCuentas();
+    private List<CuentaCliente> cuentas;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PantallaCompra.class.getName());
 
     /**
@@ -17,6 +25,9 @@ public class PantallaCompra extends javax.swing.JFrame {
      */
     public PantallaCompra() {
         initComponents();
+        cargarEvento();
+        cargarCuentas();
+        
     }
 
     /**
@@ -86,8 +97,11 @@ public class PantallaCompra extends javax.swing.JFrame {
         lblCuentaBancaria.setText("Cuenta Bancaria a Cargar:");
 
         cmbCuenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cuenta 1", "Cuenta 2", "Cuenta 3" }));
+        cmbCuenta.addActionListener(this::cmbCuentaActionPerformed);
 
         lblCVV.setText("CVV:");
+
+        pwdCVV.addActionListener(this::pwdCVVActionPerformed);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -139,6 +153,7 @@ public class PantallaCompra extends javax.swing.JFrame {
         );
 
         jButton2.setText("Comprar");
+        jButton2.addActionListener(this::jButton2ActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -259,6 +274,52 @@ public class PantallaCompra extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbCantidadActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+         JOptionPane.showMessageDialog(this, "La compra aún no puede completarse porque la base de datos no contiene el precio del boleto.");
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void cmbCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCuentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbCuentaActionPerformed
+
+    private void pwdCVVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwdCVVActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pwdCVVActionPerformed
+    
+    private void cargarEvento() {
+        Evento evento = SesionActual.getEventoSeleccionado();
+
+        if (evento == null) {
+            JOptionPane.showMessageDialog(this, "No hay un evento seleccionado.");
+            return;
+        }
+
+        lblEventoSeleccionado.setText(evento.getNombreEvento());
+        lblIDEvento.setText("EV-" + evento.getIdEvento());
+        lblLugarEvento.setText("N/D");
+        lblPrecioEvento.setText("N/D");
+    }
+    
+    private void cargarCuentas() {
+        try {
+            SesionUsuario sesion = SesionActual.getSesion();
+
+            if (sesion == null) {
+                return;
+            }
+
+            cuentas = gestorCuentas.obtenerCuentasCliente(sesion.getIdUsuario());
+
+            cmbCuenta.removeAllItems();
+
+            for (CuentaCliente cuenta : cuentas) {
+                cmbCuenta.addItem(cuenta.getBanco() + " - " + cuenta.getNumCuenta() + " - $" + cuenta.getSaldo());
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al cargar cuentas: " + e.getMessage());
+        }
+}
     /**
      * @param args the command line arguments
      */

@@ -138,20 +138,20 @@ public class PantallaCatalogo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSaldoCuentawsActionPerformed
     
     private void cargarEventos() {
-    try {
-        eventos = gestorEventos.obtenerEventos();
+        try {
+            eventos = gestorEventos.obtenerEventos();
 
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        modelo.setRowCount(0);
+            DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+            modelo.setRowCount(0);
 
-        for (Evento evento : eventos) {
-            modelo.addRow(new Object[]{evento.getNombreEvento(), evento.getNombreTipoEvento(), "N/D", "N/D", "N/D", evento.getBoletosDisponibles()});
+            for (Evento evento : eventos) {
+                modelo.addRow(new Object[]{evento.getNombreEvento(), evento.getNombreTipoEvento(), "N/D", "N/D", "N/D", evento.getBoletosDisponibles()});
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al cargar eventos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error al cargar eventos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
-}
     /**
      * @param args the command line arguments
      */

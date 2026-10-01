@@ -76,4 +76,20 @@ public class GestorEventos {
             }
         }
     }
+    
+    public void modificarEvento(Evento evento) throws SQLException {
+        if (evento == null) {
+            throw new IllegalArgumentException("No hay un evento seleccionado.");
+        }
+
+        if (evento.getNombreEvento() == null || evento.getNombreEvento().isBlank()) {
+            throw new IllegalArgumentException("El nombre del evento es obligatorio.");
+        }
+
+        if (evento.getCantidadBoletos() <= 0) {
+            throw new IllegalArgumentException("La cantidad de boletos debe ser mayor a cero.");
+        }
+
+        eventoDAO.actualizar(evento);
+    }
 }

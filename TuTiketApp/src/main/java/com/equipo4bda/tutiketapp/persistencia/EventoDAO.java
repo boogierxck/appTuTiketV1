@@ -20,13 +20,17 @@ import java.util.List;
 public class EventoDAO {
 
     public int insertar(Connection conexion, Evento evento) throws SQLException {
-        String sql = "INSERT INTO evento (id_promotora, id_tipo_evento, nombre_evento, cantidad_boletos) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO evento (id_promotora, id_tipo_evento, nombre_evento, cantidad_boletos, edad_minima, precio_boleto, id_cuenta_promotora) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, evento.getIdPromotora());
             ps.setInt(2, evento.getIdTipoEvento());
             ps.setString(3, evento.getNombreEvento());
             ps.setInt(4, evento.getCantidadBoletos());
+            ps.setInt(5, evento.getEdadMinima());
+            ps.setBigDecimal(6, evento.getPrecioBoleto());
+            ps.setInt(7, evento.getIdCuentaPromotora());
+
             ps.executeUpdate();
 
             try (ResultSet rs = ps.getGeneratedKeys()) {
@@ -36,7 +40,7 @@ public class EventoDAO {
             }
         }
 
-        throw new SQLException("No se pudo obtener el ID del evento.");
+        throw new SQLException("No se pudo obtener el ID del evento.");    
     }
 
     public List<Evento> obtenerTodos() throws SQLException {
@@ -48,6 +52,9 @@ public class EventoDAO {
                        e.id_tipo_evento,
                        e.nombre_evento,
                        e.cantidad_boletos,
+                       e.edad_minima,
+                       e.precio_boleto,
+                       e.id_cuenta_promotora,
                        c.nombre_tipo_evento,
                        (SELECT COUNT(*) FROM boleto b WHERE b.id_evento = e.id_evento AND b.estatus = 'DISPONIBLE') AS disponibles
                 FROM evento e
@@ -58,17 +65,34 @@ public class EventoDAO {
         try (Connection conexion = ConexionBD.crearConexion(); PreparedStatement ps = conexion.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Evento evento = new Evento();
+
                 evento.setIdEvento(rs.getInt("id_evento"));
                 evento.setIdPromotora(rs.getInt("id_promotora"));
                 evento.setIdTipoEvento(rs.getInt("id_tipo_evento"));
                 evento.setNombreEvento(rs.getString("nombre_evento"));
                 evento.setCantidadBoletos(rs.getInt("cantidad_boletos"));
+                evento.setEdadMinima(rs.getInt("edad_minima"));
+                evento.setPrecioBoleto(rs.getBigDecimal("precio_boleto"));
+                evento.setIdCuentaPromotora(rs.getInt("id_cuenta_promotora"));
                 evento.setNombreTipoEvento(rs.getString("nombre_tipo_evento"));
                 evento.setBoletosDisponibles(rs.getInt("disponibles"));
+
                 eventos.add(evento);
             }
         }
 
         return eventos;
     }
+    
+    public void actualizar(Evento evento) throws SQLException {
+    String sql = "UPDATE evento SET id_tipo_evento = ?, nombre_evento = ?, cantidad_boletos = ? WHERE id_evento = ?";
+
+    try (Connection conexion = ConexionBD.crearConexion(); PreparedStatement ps = conexion.prepareStatement(sql)) {
+        ps.setInt(1, evento.getIdTipoEvento());
+        ps.setString(2, evento.getNombreEvento());
+        ps.setInt(3, evento.getCantidadBoletos());
+        ps.setInt(4, evento.getIdEvento());
+        ps.executeUpdate();
+    }
+}
 }
