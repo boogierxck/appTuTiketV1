@@ -8,8 +8,16 @@ package com.equipo4bda.tutiketapp.gui;
  *
  * @author lui
  */
+import com.equipo4bda.tutiketapp.negocio.Evento;
+import com.equipo4bda.tutiketapp.negocio.GestorEventos;
+import com.equipo4bda.tutiketapp.negocio.SesionActual;
+import com.equipo4bda.tutiketapp.negocio.SesionUsuario;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 public class PantallaCatalogo extends javax.swing.JFrame {
-    
+    private final GestorEventos gestorEventos = new GestorEventos();
+    private List<Evento> eventos;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PantallaCatalogo.class.getName());
 
     /**
@@ -17,6 +25,7 @@ public class PantallaCatalogo extends javax.swing.JFrame {
      */
     public PantallaCatalogo() {
         initComponents();
+        cargarEventos();
     }
 
     /**
@@ -106,13 +115,43 @@ public class PantallaCatalogo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSeleccionarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarEventoActionPerformed
-        // TODO add your handling code here:
+        int fila = jTable1.getSelectedRow();
+
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Selecciona un evento.");
+            return;
+        }
+
+        Evento evento = eventos.get(fila);
+
+        SesionActual.setEventoSeleccionado(evento);
+
+        PantallaCompra pantalla = new PantallaCompra();
+        pantalla.setLocationRelativeTo(null);
+        pantalla.setVisible(true);
     }//GEN-LAST:event_btnSeleccionarEventoActionPerformed
 
     private void btnSaldoCuentawsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaldoCuentawsActionPerformed
-        // TODO add your handling code here:
+        PantallaSaldos pantalla = new PantallaSaldos();
+        pantalla.setLocationRelativeTo(null);
+        pantalla.setVisible(true);
     }//GEN-LAST:event_btnSaldoCuentawsActionPerformed
+    
+    private void cargarEventos() {
+    try {
+        eventos = gestorEventos.obtenerEventos();
 
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        modelo.setRowCount(0);
+
+        for (Evento evento : eventos) {
+            modelo.addRow(new Object[]{evento.getNombreEvento(), evento.getNombreTipoEvento(), "N/D", "N/D", "N/D", evento.getBoletosDisponibles()});
+        }
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al cargar eventos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
     /**
      * @param args the command line arguments
      */

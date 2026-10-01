@@ -8,10 +8,14 @@ package com.equipo4bda.tutiketapp.gui;
  *
  * @author lui
  */
+import com.equipo4bda.tutiketapp.negocio.GestorAutenticacion;
+import com.equipo4bda.tutiketapp.negocio.SesionActual;
+import com.equipo4bda.tutiketapp.negocio.SesionUsuario;
+import javax.swing.JOptionPane;
 public class PantallaInicioSesion extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PantallaInicioSesion.class.getName());
-
+    private final GestorAutenticacion gestorAutenticacion = new GestorAutenticacion();
     /**
      * Creates new form PantallaInicioSesion
      */
@@ -96,11 +100,35 @@ public class PantallaInicioSesion extends javax.swing.JFrame {
     }//GEN-LAST:event_pwdContrasenaActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        // TODO add your handling code here:
+        try {
+           String usuario = txtEmail.getText().trim();
+           String contrasena = new String(pwdContrasena.getPassword());
+
+           SesionUsuario sesion = gestorAutenticacion.iniciarSesion(usuario, contrasena);
+
+           SesionActual.setSesion(sesion);
+
+           if (sesion.getTipo() == SesionUsuario.Tipo.CLIENTE) {
+               PantallaCatalogo pantalla = new PantallaCatalogo();
+               pantalla.setLocationRelativeTo(null);
+               pantalla.setVisible(true);
+           } else {
+               PantallaRendimientoAdmin pantalla = new PantallaRendimientoAdmin();
+               pantalla.setLocationRelativeTo(null);
+               pantalla.setVisible(true);
+           }
+
+           dispose();
+
+       } catch (Exception e) {
+           JOptionPane.showMessageDialog(this, e.getMessage(), "Inicio de sesión", JOptionPane.ERROR_MESSAGE);
+       }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnRegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarClienteActionPerformed
-        // TODO add your handling code here:
+        PantallaRegistro pantalla = new PantallaRegistro();
+        pantalla.setLocationRelativeTo(null);
+        pantalla.setVisible(true);
     }//GEN-LAST:event_btnRegistrarClienteActionPerformed
 
     /**

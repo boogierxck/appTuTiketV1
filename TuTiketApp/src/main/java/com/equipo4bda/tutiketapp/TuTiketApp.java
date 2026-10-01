@@ -8,9 +8,18 @@ package com.equipo4bda.tutiketapp;
  *
  * @author lui
  */
-public class TuTiketApp {
 
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
+import com.equipo4bda.tutiketapp.gui.PantallaInicioSesion;
+public class TuTiketApp {
+public static void main(String[] args) {
+
+        java.awt.EventQueue.invokeLater(() -> {
+
+            PantallaInicioSesion pantalla = new PantallaInicioSesion();
+
+            pantalla.setLocationRelativeTo(null);
+
+            pantalla.setVisible(true);
+        });
     }
 }

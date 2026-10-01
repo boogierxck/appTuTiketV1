@@ -8,8 +8,12 @@ package com.equipo4bda.tutiketapp.gui;
  *
  * @author lui
  */
+import com.equipo4bda.tutiketapp.negocio.GestorClientes;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
 public class PantallaRegistro extends javax.swing.JFrame {
-    
+    private final GestorClientes gestorClientes = new GestorClientes();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PantallaRegistro.class.getName());
 
     /**
@@ -17,6 +21,8 @@ public class PantallaRegistro extends javax.swing.JFrame {
      */
     public PantallaRegistro() {
         initComponents();
+        btnConfirmar.addActionListener(e -> registrar());
+        btnAtras.addActionListener(e -> volver());
     }
 
     /**
@@ -76,6 +82,7 @@ public class PantallaRegistro extends javax.swing.JFrame {
         lblCotrasena.setText("Contraseña:");
 
         btnConfirmar.setText("Confirmar");
+        btnConfirmar.addActionListener(this::btnConfirmarActionPerformed);
 
         btnAtras.setText("Atrás");
 
@@ -181,6 +188,75 @@ public class PantallaRegistro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtApellidoPaternoActionPerformed
 
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        try {
+            String nombres = txtNomrbes.getText().trim();
+            String paterno = txtApellidoPaterno.getText().trim();
+            String materno = txtApellidoMaterno.getText().trim();
+            String usuario = txtEmail.getText().trim();
+            String contrasena = new String(txtContrasena.getPassword());
+            String confirmarContrasena = new String(txtConfirmaContrasena.getPassword());
+
+            if (nombres.isBlank() || paterno.isBlank() || usuario.isBlank() || contrasena.isBlank() || confirmarContrasena.isBlank()) {
+                JOptionPane.showMessageDialog(this, "Completa todos los campos obligatorios.", "Registro", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            if (!contrasena.equals(confirmarContrasena)) {
+                JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden.", "Registro", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            LocalDate fechaNacimiento = LocalDate.parse(txtFechaNacimiento.getText().trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+            gestorClientes.registrarCliente(nombres, paterno, usuario, contrasena, fechaNacimiento);
+
+            JOptionPane.showMessageDialog(this, "Cliente registrado correctamente.", "Registro", JOptionPane.INFORMATION_MESSAGE);
+
+            dispose();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error de registro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnConfirmarActionPerformed
+
+    private void registrar() {
+        try {
+            String tipo = String.valueOf(cmbTipoUsuario.getSelectedItem());
+
+            if (!tipo.equals("Cliente")) {
+                JOptionPane.showMessageDialog(this, "Por el momento este registro está conectado únicamente para clientes.");
+                return;
+            }
+
+            String nombres = txtNomrbes.getText().trim();
+            String paterno = txtApellidoPaterno.getText().trim();
+            String materno = txtApellidoMaterno.getText().trim();
+            String usuario = txtEmail.getText().trim();
+            String contrasena = new String(txtContrasena.getPassword());
+            String confirmarContrasena = new String(txtConfirmaContrasena.getPassword());
+
+            if (!contrasena.equals(confirmarContrasena)) {
+                JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden.");
+                return;
+            }
+
+            LocalDate fechaNacimiento = LocalDate.parse(txtFechaNacimiento.getText().trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+            gestorClientes.registrarCliente(nombres, paterno, usuario, contrasena, fechaNacimiento);
+
+            JOptionPane.showMessageDialog(this, "Cliente registrado correctamente.");
+
+            dispose();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Registro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void volver() {
+        dispose();
+    }
     /**
      * @param args the command line arguments
      */
